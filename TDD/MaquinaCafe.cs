@@ -11,32 +11,48 @@ namespace TDD
     {
         
         private Cafetera cafetera;
+        private Azuquero azuquero;
         private Vaso vasosPequenos;
         private Vaso vasosMedianos;
         private Vaso vasosGrandes;
-        private Azuquero azuquero;
 
-        
         public Vaso getTipoVaso(string tipoDeVaso)
         {
-            if(tipoDeVaso == "pequeno")
+            switch (tipoDeVaso)
             {
-                return vasosPequenos;
-            } 
-            else if (tipoDeVaso == "mediano")
-            {
-                return vasosMedianos;
+                case "pequeno":
+                    return getVasosPequenos();
+                    break;
+                case "mediano":
+                    return getVasosMediano();
+                    break;
+                case "grande":
+                    return getVasosGrande();
+                default : 
+                    return null;
             }
-            else if (tipoDeVaso == "grande")
-            {
-                return vasosGrandes;
-            }
-            return null;
         }
 
-        public void getVasoDeCafe(Vaso tipoDeVaso, int cantidadDeVasos, Azuquero cantidadDeAzucar)
+        public string getVasoDeCafe(Vaso tipoDeVaso, int cantidadDeVasos, int cantidadDeAzucar)
         {
+            if (tipoDeVaso.getCantidadVasos() < cantidadDeVasos)
+            {
+                return "No hay vasos";
+            }
+            else if (azuquero.getCantidadAzucar() < cantidadDeAzucar)
+            {
+                return "No hay Azucar";
+            }
+            else if(cafetera.getCantidadDeCafe() < tipoDeVaso.getContenido())
+            {
+                return "No hay cafe";
+            }
+            
+            tipoDeVaso.setCantidadVasos(tipoDeVaso.getCantidadVasos() - cantidadDeVasos);
+            azuquero.setCantidadAzucar(azuquero.getCantidadAzucar() - cantidadDeAzucar);
+            cafetera.setCantidadDeCafe(cafetera.getCantidadDeCafe() - tipoDeVaso.getContenido());
 
+            return "Felicitaciones";
         }
 
         public void setCafetera(Cafetera cafetera) => this.cafetera = cafetera;
@@ -49,6 +65,8 @@ namespace TDD
 
         public void setVasosPequenos(Vaso vasosPequenos) => this.vasosPequenos = vasosPequenos;
 
+        public Cafetera getCafetera() => this.cafetera;
+        public Azuquero getAzuquero() => this.azuquero;
         public Vaso getVasosGrande() => this.vasosGrandes;
         public Vaso getVasosMediano() => this.vasosMedianos;
         public Vaso getVasosPequenos() => this.vasosPequenos;
