@@ -10,11 +10,11 @@ namespace TDD
     public class MaquinaCafe
     {
         
-        private Cafetera cafetera;
-        private Azuquero azuquero;
-        private Vaso vasosPequenos;
-        private Vaso vasosMedianos;
-        private Vaso vasosGrandes;
+        private Cafetera cafetera = new Cafetera(50);
+        private Azuquero azuquero = new Azuquero(20);
+        private Vaso vasosPequenos = new Vaso(5, 10);
+        private Vaso vasosMedianos = new Vaso(5, 20);
+        private Vaso vasosGrandes = new Vaso(5, 30);
 
         public Vaso getTipoVaso(string tipoDeVaso)
         {
@@ -28,8 +28,10 @@ namespace TDD
                     break;
                 case "grande":
                     return getVasosGrande();
-                default : 
+                    break;
+                default :
                     return null;
+                    break;
             }
         }
 
